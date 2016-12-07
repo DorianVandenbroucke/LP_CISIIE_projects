@@ -72,7 +72,13 @@ lightbox.modules.actions = (function(){
     changeImage: function(image){
       var src = $(image).attr("data-img");
       $("#lightbox img").attr("src", src);
-      console.log($("#lightbox img").width());
+
+      /*var img_width = $("#lightbox img").width();
+      var img_height = $("#lightbox img").height();
+      var window_width = $(window).width();
+      var window_height = $(window).height();
+      var img_coef = img_width / img_height;
+      var window_coef = window_width / window_height;*/
     },
 
     // On remplace le titre de la lightbox par celui qui est en paramètre
