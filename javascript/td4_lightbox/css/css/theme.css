@@ -15,16 +15,24 @@
   left: 0;
   background-color: rgba(0, 0, 0, 0.9);
   display: none; }
+  .lightbox .comment {
+    position: absolute; }
   .lightbox #content {
     box-sizing: border-box;
     text-align: center;
-    margin: 5% auto; }
-    .lightbox #content h1 {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; }
+    .lightbox #content .header {
       position: absolute;
-      color: #fff;
+      background-color: rgba(0, 0, 0, 0.9);
       top: 0;
       left: 0;
       right: 0; }
+    .lightbox #content h1 {
+      color: #fff; }
     .lightbox #content img {
       max-width: 100%;
       max-height: 100%; }

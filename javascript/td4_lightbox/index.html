@@ -46,25 +46,27 @@
 <!-- On gère ici la lightbox -->
 <div class="lightbox" id="lightbox">
   <div id="content">
-    <h1>Mystrious Lanscape</h1>
+    <div class="header">
+      <h1>Mystrious Lanscape</h1>
+      <div class="lightbox_events">
+        <button id="lightbox_previous"><</button>
+        <button id="lightbox_next">></button>
+        <button id="lightbox_full_screen">[]</button>
+        <button id="lightbox_close">x</button>
+        <button id="lightbox_comment">Commentaires</button>
+      </div>
+    </div>
     <img data-img="gallery/large/landscape-1112911_1280.jpg"
         src="gallery/small/landscape-1112911_640.jpg">
-    <div class="lightbox_events">
-      <button id="lightbox_previous"><</button>
-      <button id="lightbox_next">></button>
-      <button id="lightbox_full_screen">[]</button>
-      <button id="lightbox_close">x</button>
-      <button id="lightbox_comment">Commentaires</button>
-    </div>
-    <div class="comment">
-      <form>
-        <h2>Ajouter un commentaire</h2>
-        <textarea id="comment_content"></textarea>
-        <br />
-        <button id="comment_validate">Commenter</button>
-      </form>
-      <div id="all_comments">
-      </div>
+  </div>
+  <div class="comment">
+    <form>
+      <h2>Ajouter un commentaire</h2>
+      <textarea id="comment_content"></textarea>
+      <br />
+      <button id="comment_validate">Commenter</button>
+    </form>
+    <div id="all_comments">
     </div>
   </div>
 </div>

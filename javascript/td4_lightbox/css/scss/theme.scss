@@ -24,15 +24,24 @@
   background-color: rgba(0,0,0,0.9);
   display: none;
 
+  .comment{
+    position: absolute;
+  }
+
   #content{
     box-sizing: border-box;
     text-align: center;
-    margin: 5% auto;
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+
+    .header{
+      position: absolute;
+      background-color: rgba(0,0,0,0.9);
+      top: 0; left: 0; right: 0;
+    }
 
     h1{
-      position: absolute;
       color: #fff;
-      top: 0; left: 0; right: 0;
     }
 
     img{
