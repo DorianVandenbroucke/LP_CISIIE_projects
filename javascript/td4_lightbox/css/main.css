@@ -1,0 +1,53 @@
+
+/* Style de la galerie */
+
+.gallery-container .vignette{
+  display: inline-block;
+}
+
+.vignette{
+  border: 1px solid #000;
+  margin: 20px;
+  padding: 20px;
+}
+
+.vignette img{
+  height: 100px;
+  cursor: pointer;
+}
+
+/* Style de la lightbox */
+
+.lightbox{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top:0; left: 0;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+}
+
+.lightbox #content{
+  box-sizing: border-box;
+  text-align: center;
+  height: 80%;
+  margin: 5% auto;
+}
+
+.lightbox #content img{
+  height: 100%;
+}
+
+.lightbox #content .lightbox_events{
+  position: absolute;
+  top: 0; right: 0;
+  text-transform: uppercase;
+}
+
+.lightbox #content .lightbox_events button{
+  cursor: pointer;
+  color: #fff;
+  background-color: #000;
+  border: none;
+  padding: 10px;
+}

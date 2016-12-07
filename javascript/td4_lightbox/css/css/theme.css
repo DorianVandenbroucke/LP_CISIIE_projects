@@ -1,0 +1,42 @@
+.gallery-container .vignette {
+  display: inline-block;
+  border: 1px solid #000;
+  cursor: pointer;
+  margin: 20px;
+  padding: 20px; }
+  .gallery-container .vignette img {
+    height: 100px; }
+
+.lightbox {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: none; }
+  .lightbox #content {
+    box-sizing: border-box;
+    text-align: center;
+    margin: 5% auto; }
+    .lightbox #content h1 {
+      position: absolute;
+      color: #fff;
+      top: 0;
+      left: 0;
+      right: 0; }
+    .lightbox #content img {
+      height: 100%; }
+    .lightbox #content .lightbox_events {
+      position: absolute;
+      top: 0;
+      right: 0;
+      text-transform: uppercase; }
+      .lightbox #content .lightbox_events button {
+        cursor: pointer;
+        color: #fff;
+        background-color: #000;
+        border: 1px solid;
+        padding: 10px; }
+
+/*# sourceMappingURL=theme.css.map */

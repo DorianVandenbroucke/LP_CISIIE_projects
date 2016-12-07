@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"   href="css/css/theme.css">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div class="gallery-container" id="My-lightbox-gallery">
+
+    <div class="vignette" >
+        <img data-img="gallery/large/landscape-1112911_1280.jpg"
+        src="gallery/small/landscape-1112911_640.jpg">
+        <div>Mystrious Lanscape</div>
+
+    </div>
+
+    <div class="vignette" >
+        <img data-img="gallery/large/rocky-mountain-1149298_1280.jpg"
+             src="gallery/small/rocky-mountain-1149298_640.jpg">
+        <div>Rocky Mountain !</div>
+    </div>
+
+    <div class="vignette" >
+        <img data-img="gallery/large/seacoast-1507243_1280.jpg"
+             src="gallery/small/seacoast-1507243_640.jpg">
+        <div>Summer Sea Coast</div>
+    </div>
+
+    <div class="vignette" >
+        <img data-img="gallery/large/snow-1216542_1920.jpg"
+             src="gallery/small/snow-1216542_640.jpg">
+        <div>Snowy Winter Mountain</div>
+    </div>
+
+    <div class="vignette" >
+        <img data-img="gallery/large/wave-1246560_1920.jpg"
+             src="gallery/small/wave-1246560_640.jpg">
+        <div>The Big Large Wave !</div>
+    </div>
+
+</div>
+
+<!-- On gère ici la lightbox -->
+<div class="lightbox" id="lightbox">
+  <div id="content">
+    <h1>Mystrious Lanscape</h1>
+    <img data-img="gallery/large/landscape-1112911_1280.jpg"
+        src="gallery/small/landscape-1112911_640.jpg">
+    <div class="lightbox_events">
+      <button id="lightbox_previous"><</button>
+      <button id="lightbox_next">></button>
+      <button id="lightbox_full_screen">[]</button>
+      <button id="lightbox_close">x</button>
+      <button id="lightbox_comment">Commentaires</button>
+    </div>
+    <div class="comment">
+      <form>
+        <h2>Ajouter un commentaire</h2>
+        <textarea id="comment_content"></textarea>
+        <br />
+        <button id="comment_validate">Commenter</button>
+      </form>
+      <div id="all_comments">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+
+<script> window.jQuery || document.write('<script src="bower_components/jquery/dist/jquery.js"><\/script>') </script>
+<script src="lib/lightbox/lightbox.js"></script>
+<script src="lib/demo.js"></script>
+</body>
+</html>
