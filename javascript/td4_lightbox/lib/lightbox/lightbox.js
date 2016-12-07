@@ -92,6 +92,7 @@ lightbox.modules.events = (function(){
       $("#lightbox_previous").on("click", this.previous);
       $("#lightbox_next").on("click", this.next);
       $("#lightbox_comment").on("click", this.openComments);
+      $("#lightbox_full_screen").on("click", this.fullScreen);
 
       // On gère les actions sur les touches précédent et suivant du clavier
       $(document).keydown(function(e){
@@ -122,6 +123,10 @@ lightbox.modules.events = (function(){
 
     openComments: function(){
       $("#comments").slideToggle();
+    },
+
+    fullScreen: function(){
+      
     }
 
   }
