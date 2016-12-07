@@ -151,8 +151,15 @@ lightbox.modules.comments = (function(){
       container.append($("<h3>").text(com.image_title).addClass("hidden"));
       container.append($("<strong>").text(com.date));
       container.append($("<p>").text(com.content));
+      container.append($("<button>").text("Modifier").click(lightbox.modules.comments.modifyComment));
       $("#all_comments").append(container);
       return false;
+    },
+
+    modifyComment: function(){
+      var text_to_modify = $(this).parent().children("p").text();
+      $("#comment_content").val(text_to_modify);
+      $(this).parent().remove();
     }
 
   }
