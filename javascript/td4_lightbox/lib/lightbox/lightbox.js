@@ -92,6 +92,18 @@ lightbox.modules.events = (function(){
       $("#lightbox_close").on("click", this.close);
       $("#lightbox_previous").on("click", this.previous);
       $("#lightbox_next").on("click", this.next);
+
+      // On gère les actions sur les touches précédent et suivant du clavier
+      $(document).keydown(function(e){
+        switch(e.keyCode){
+          case 37:
+        		lightbox.modules.events.previous();
+        		break;
+        	case 39:
+        	  lightbox.modules.events.next();
+        	  break;
+        }
+      });
     },
 
     // On ferme la lightbox
