@@ -72,13 +72,6 @@ lightbox.modules.actions = (function(){
     changeImage: function(image){
       var src = $(image).attr("data-img");
       $("#lightbox img").attr("src", src);
-
-      /*var img_width = $("#lightbox img").width();
-      var img_height = $("#lightbox img").height();
-      var window_width = $(window).width();
-      var window_height = $(window).height();
-      var img_coef = img_width / img_height;
-      var window_coef = window_width / window_height;*/
     },
 
     // On remplace le titre de la lightbox par celui qui est en paramètre
@@ -98,6 +91,7 @@ lightbox.modules.events = (function(){
       $("#lightbox_close").on("click", this.close);
       $("#lightbox_previous").on("click", this.previous);
       $("#lightbox_next").on("click", this.next);
+      $("#lightbox_comment").on("click", this.openComments);
 
       // On gère les actions sur les touches précédent et suivant du clavier
       $(document).keydown(function(e){
@@ -124,6 +118,10 @@ lightbox.modules.events = (function(){
 
     next: function(){
       lightbox.modules.actions.changeImageAction(1);
+    },
+
+    openComments: function(){
+      $("#comments").slideToggle();
     }
 
   }
@@ -149,10 +147,8 @@ lightbox.modules.comments = (function(){
       var comment_content = $("#comment_content").val();
       var image = $("#lightbox h1").html();
       var com = new Comment(today, comment_content, image);
-      console.log(com.content);
       var container = $("<div>");
-      var input = container.append($("<input>").text(com.image_title));
-      input.attr("type", "hidden");
+      container.append($("<h3>").text(com.image_title).addClass("hidden"));
       container.append($("<strong>").text(com.date));
       container.append($("<p>").text(com.content));
       $("#all_comments").append(container);

@@ -1,3 +1,6 @@
+.hidden {
+  visibility: hidden; }
+
 .gallery-container .vignette {
   display: inline-block;
   border: 1px solid #000;
@@ -22,7 +25,8 @@
     bottom: 0;
     overflow: auto;
     padding: 10px;
-    background-color: rgba(255, 255, 255, 0.9); }
+    background-color: rgba(255, 255, 255, 0.9);
+    display: none; }
   .lightbox #content {
     box-sizing: border-box;
     text-align: center;
