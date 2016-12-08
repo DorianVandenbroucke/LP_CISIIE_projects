@@ -137,7 +137,7 @@ lightbox.modules.events = (function(){
     },
 
     fullScreen: function(){
-
+      $(document).toggleFullScreen();
     }
 
   }
@@ -163,6 +163,25 @@ lightbox.modules.comments = (function(){
       var comment_content = $("#comment_content").val();
       var image = $("#lightbox h1").html();
       var com = new Comment(today, comment_content, image);
+
+      if(localStorage.getItem("comments")){
+        var comments = localStorage.getItem("comments");
+      }else{
+        var comments = [];
+      }
+
+      comments[comments.length] = com;
+
+      localStorage.setItem("comments", comments);
+      console.log(localStorage.getItem("comments"));
+      return false;
+    },
+
+    /*addComment: function(){
+      var today = new Date();
+      var comment_content = $("#comment_content").val();
+      var image = $("#lightbox h1").html();
+      var com = new Comment(today, comment_content, image);
       var container = $("<div>");
       container.append($("<h3>").text(com.image_title).addClass("hidden"));
       container.append($("<strong>").text(com.date));
@@ -170,7 +189,7 @@ lightbox.modules.comments = (function(){
       container.append($("<button>").text("Modifier").click(lightbox.modules.comments.modifyComment));
       $("#all_comments").append(container);
       return false;
-    },
+    },*/
 
     modifyComment: function(){
       var text_to_modify = $(this).parent().children("p").text();
