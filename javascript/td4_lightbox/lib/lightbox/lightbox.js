@@ -72,6 +72,17 @@ lightbox.modules.actions = (function(){
     changeImage: function(image){
       var src = $(image).attr("data-img");
       $("#lightbox img").attr("src", src);
+
+      // On adapte la taille de l'image en fonction de la taille de la fenêtre
+      $("#lightbox img").removeClass("img_widht").removeClass("img_height");
+      var img_size = $("#lightbox img").width() / $("#lightbox img").height();
+      var screen_size = $(window).width() / $(window).height();
+
+      if(screen_size >= img_size){
+        $("#lightbox img").addClass("img_height");
+      }else if(screen_size < img_size){
+        $("#lightbox img").addClass("img_widht");
+      }
     },
 
     // On remplace le titre de la lightbox par celui qui est en paramètre
@@ -126,7 +137,7 @@ lightbox.modules.events = (function(){
     },
 
     fullScreen: function(){
-      
+
     }
 
   }
