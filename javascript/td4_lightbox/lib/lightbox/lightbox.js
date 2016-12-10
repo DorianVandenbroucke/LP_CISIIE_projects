@@ -47,9 +47,10 @@ lightbox.modules.actions = (function(){
 
     // On ouvre la lightbox
     open: function(){
+      $("#lightbox").fadeToggle("slow");
       lightbox.modules.actions.changeImage($(this).children("img"));
       lightbox.modules.actions.changeTitle($(this).children("div").html());
-      $("#lightbox").fadeToggle("slow");
+      lightbox.modules.comments.displayCommentsByImage();
     },
 
     // On joue le changement d'image selon l'image qu'on cherche à afficher (précédent, suivant)
@@ -58,10 +59,24 @@ lightbox.modules.actions = (function(){
       var arr_img = lightbox.modules.load.storeImages();
       var arr_tit = lightbox.modules.load.storeTitles();
       var i = 0;
+
       $.each(arr_img, function(){
         if(img_src === $(this).attr("data-img")){
+          if(i == 0 && parametre == -1){
+            lightbox.modules.actions.changeImage(arr_img[arr_img.length - 1]);
+            lightbox.modules.actions.changeTitle(arr_tit[arr_tit.length - 1]);
+            lightbox.modules.comments.displayCommentsByImage();
+            return false;
+          }
+          if(i == (arr_img.length - 1) && parametre == 1){
+            lightbox.modules.actions.changeImage(arr_img[0]);
+            lightbox.modules.actions.changeTitle(arr_tit[0]);
+            lightbox.modules.comments.displayCommentsByImage();
+            return false;
+          }
           lightbox.modules.actions.changeImage(arr_img[i+parametre]);
           lightbox.modules.actions.changeTitle(arr_tit[i+parametre]);
+          lightbox.modules.comments.displayCommentsByImage();
           return false;
         }
         i = i+1;
@@ -158,43 +173,67 @@ lightbox.modules.comments = (function(){
       $("#comment_validate").on("click", this.addComment);
     },
 
+    // On ajoute un commentaire
     addComment: function(){
       var today = new Date();
       var comment_content = $("#comment_content").val();
       var image = $("#lightbox h1").html();
-      var com = new Comment(today, comment_content, image);
+      var com = JSON.stringify(new Comment(today, comment_content, image));
 
-      if(localStorage.getItem("comments")){
-        var comments = localStorage.getItem("comments");
-      }else{
-        var comments = [];
+      if(localStorage.getItem("list_comments") != ""){
+        com = localStorage.getItem("list_comments") + "," + com;
       }
-
-      comments[comments.length] = com;
-
-      localStorage.setItem("comments", comments);
-      console.log(localStorage.getItem("comments"));
+      localStorage.setItem("list_comments", com);
+      lightbox.modules.comments.displayCommentsByImage();
+      $("#comment_content").val("");
       return false;
     },
 
-    /*addComment: function(){
-      var today = new Date();
-      var comment_content = $("#comment_content").val();
-      var image = $("#lightbox h1").html();
-      var com = new Comment(today, comment_content, image);
-      var container = $("<div>");
-      container.append($("<h3>").text(com.image_title).addClass("hidden"));
-      container.append($("<strong>").text(com.date));
-      container.append($("<p>").text(com.content));
-      container.append($("<button>").text("Modifier").click(lightbox.modules.comments.modifyComment));
-      $("#all_comments").append(container);
-      return false;
-    },*/
+    // On affiche tous les commentaires d'une image
+    displayCommentsByImage: function(){
 
+      if(!localStorage.getItem("list_comments")){
+        localStorage.setItem("list_comments", "");
+      }
+
+      var list_comments = $.parseJSON("[" + localStorage.getItem("list_comments") + "]");
+
+      $("#all_comments").html("");
+
+      for(var i = 0; i< list_comments.length; i++){
+        if(list_comments[i].image_title === $("#lightbox h1").text()){
+          var container = $("<div>");
+          container.append($("<h3>").text(list_comments[i].image_title));
+          container.append($("<strong>").text(list_comments[i].date));
+          container.append($("<p>").text(list_comments[i].content));
+          container.append($("<button>").text("modifier").click(lightbox.modules.comments.modifyComment));
+          $("#all_comments").append(container);
+        }
+      }
+
+    },
+
+    // On modifie un commentaire
     modifyComment: function(){
+      var title_image_text_to_modify = $(this).parent().children("h3").text();
       var text_to_modify = $(this).parent().children("p").text();
+      var date_text_to_modify = $(this).parent().children("strong").text();
       $("#comment_content").val(text_to_modify);
-      $(this).parent().remove();
+
+      var list_comments = $.parseJSON("[" + localStorage.getItem("list_comments") + "]");
+
+      for(var i = 0; i< list_comments.length; i++){
+        if(
+          list_comments[i].image_title === title_image_text_to_modify &&
+          list_comments[i].content === text_to_modify &&
+          list_comments[i].date === date_text_to_modify
+        ){
+          list_comments.splice(i, 1);
+        }
+      }
+
+      localStorage.setItem("list_comments", JSON.stringify(list_comments));
+
     }
 
   }
