@@ -31,7 +31,7 @@ $app->get(
       $resp = $resp->withStatus(200)->withHeader('Content-type', 'application/json, charset=utf-8');
       $resp->getBody()->write(json_encode($chaine));
     }catch(Illuminate\Database\Eloquent\ModelNotFoundException $e){
-      $chaine = ["erreur", "Categorie introuvable"];
+      $chaine = ["Erreur", "Categorie d'ingrédients $id introuvable."];
       $resp = $resp->withStatus(404)->withHeader('Content-type', 'application/json, charset=utf-8');
       $resp->getBody()->write(json_encode($chaine));
     }
