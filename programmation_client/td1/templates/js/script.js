@@ -49,7 +49,11 @@ app = (function(){
       articles_container.append($("<span>").text(art + " "));
     });
     container.append(articles_container);
-    $("#basket").append(container);
+    if($("#basket ul").text()){
+      $("#basket ul").replaceWith(container);
+    }else{
+      $("#basket").append(container);
+    }
   };
 
   getCommand = function(){
@@ -84,17 +88,17 @@ app = (function(){
     article = articles_basket.push(article);
     var nombre = parseInt(basket.number) + 1;
     var prix = parseFloat(basket.price) + parseFloat($(this).parent().children("strong").text());
+    prix = prix.toFixed(2);
     $.post(
       "json/basket.php",
       {
         number_product: nombre,
         price_product: prix,
         article: article,
-      },
+      }
     ).done(function(data){
       var data = $.parseJSON(data);
       basket = new Basket(data);
-      console.log(basket);
       displayBasket();
     });
   };
