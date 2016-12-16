@@ -8,9 +8,12 @@ $user_basket = [
   "prix" => 0
 ];
 
-if(isset($_POST['add_product'])){
-  $user_basket['nombre'] = 1 + $_POST['number_product'];
-  $user_basket['prix'] += $_POST['price_product'];
+if(isset($_POST['article'])){
+  $user_basket = [
+    "nom" => "Arthur",
+    "nombre" => $_POST['number_product'],
+    "prix" => $_POST['price_product']
+  ];
 }
 
 echo json_encode($user_basket);
