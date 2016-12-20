@@ -8,11 +8,11 @@ class Ingredient extends Model{
 
   protected $table = "ingredient";
   protected $primaryKey = "id";
-  protected $fillable = ["name", "cat_id", "description", "fournisseur", "img"];
+  protected $fillable = ["nom", "cat_id", "description", "fournisseur", "img"];
   public $timestamps = false;
 
   public function getCategory(){
-    return $this->belongsTo("src\models\Category", "cat_id");
+    return $this->belongsTo("src\models\Categorie", "cat_id");
   }
 
 }
