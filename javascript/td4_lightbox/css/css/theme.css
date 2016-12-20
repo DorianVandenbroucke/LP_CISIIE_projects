@@ -40,10 +40,11 @@
     top: 0;
     bottom: 0;
     left: 0;
-    right: 0; }
+    right: 0;
+    overflow: hidden; }
     .lightbox #content .header {
       position: absolute;
-      background-color: rgba(0, 0, 0, 0.9);
+      background-color: rgba(0, 0, 0, 0.8);
       top: 0;
       left: 0;
       right: 0; }
