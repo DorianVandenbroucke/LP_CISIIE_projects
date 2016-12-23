@@ -70,4 +70,24 @@ $app->get("/ingredients/{id}/categorie[/]",function(Request $req, Response $resp
   return (new IngredientController($this))->getCategory($args['id']);
 });
 
+$app->get(
+  "/commandes/add[/]",
+  function(Request $req, Response $resp, $args){
+    try{
+      $chaine = CommandeController::add(
+                                          $args['montant'],
+                                          $args['date_de_livraison'],
+                                          $args['etat']
+                                        );
+      $resp = $resp->withStatus(200)->withHeader('Content-type', 'application/json, charset=utf-8');
+      $resp->getBody()->write(json_encode($chaine));
+    }catch(Illuminate\Database\Eloquent\ModelNotFoundException $e){
+      $chaine = ["Erreur", "Une erreur est survenue lors de l'ajout de la commande."];
+      $resp = $resp->withStatus(404)->withHeader('Content-type', 'application/json, charset=utf-8');
+      $resp->getBody()->write(json_encode($chaine));
+    }
+    return $resp;
+  }
+);
+
 $app->run();
