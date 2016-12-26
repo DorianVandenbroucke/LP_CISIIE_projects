@@ -1,0 +1,15 @@
+{
+  "name": "bdweb-games",
+  "require" : {
+    "illuminate/database": "5.0.*",
+    "php": ">=5.4",
+    "fzaninotto/faker": "^1.6"
+  },
+
+  "autoload" : {
+    "psr-0": {
+      "app\\": "."
+    }
+  }
+
+}
