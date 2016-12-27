@@ -4,4 +4,5 @@ require_once("vendor/autoload.php");
 src\utils\AppInit::bootEloquent('conf/conf.ini');
 
 use src\controllers\CommandeController as CommandeController;
-var_dump(CommandeController::add(58, date("Y-m-d"), 0));
+$args = $_POST;
+var_dump(CommandeController::add($args));

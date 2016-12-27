@@ -71,14 +71,9 @@ $app->get("/ingredients/{id}/categorie[/]",function(Request $req, Response $resp
 });
 
 $app->get(
-  "/commandes/add[/]",
-  function(Request $req, Response $resp, $args){
+  "/commandes/add[/]",function(Request $req, Response $resp, $args){
     try{
-      $chaine = CommandeController::add(
-                                          $args['montant'],
-                                          $args['date_de_livraison'],
-                                          $args['etat']
-                                        );
+      $chaine = CommandeController::add($args);
       $resp = $resp->withStatus(200)->withHeader('Content-type', 'application/json, charset=utf-8');
       $resp->getBody()->write(json_encode($chaine));
     }catch(Illuminate\Database\Eloquent\ModelNotFoundException $e){

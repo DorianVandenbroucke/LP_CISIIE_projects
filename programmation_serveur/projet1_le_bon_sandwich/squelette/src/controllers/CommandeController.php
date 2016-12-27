@@ -14,16 +14,18 @@ class CommandeController extends AbstractController{
     $this->auth = new Authentification();
   }
 
-  static public function add($montant, $date_de_livraison, $etat){
+  static public function add($args){
 
-    if(!isset($etat)){
+    var_dump($args); die;
+
+    if(!isset($args['etat'])){
       $etat = "En attente";
     }
 
     $commande = new Commande();
-    $commande->montant = $montant;
-    $commande->date_de_livraison = $date_de_livraison;
-    $commande->etat = $etat;
+    $commande->montant = $args['montant'];
+    $commande->date_de_livraison = $args['date_de_livraison'];
+    $commande->etat = $args['etat'];
 
     $commande->save();
 
