@@ -8,6 +8,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 use src\controllers\CategorieController as CategorieController;
 use src\controllers\IngredientController as IngredientController;
+use src\controllers\CommandeController as CommandeController;
 
 $app = new \Slim\App;
 
@@ -58,17 +59,39 @@ $app->get(
   }
 );
 
-$app->get("/ingredients[/]",function(Request $req, Response $resp, $args){
-  return (new IngredientController($this))->listIngredients();
-});
+$app->get(
+  "/ingredients/{id}[/]",
+  function(Request $req, Response $resp, $args){
+    try{
+      $id = $args['id'];
+      $chaine = IngredientController::detailIngredient($id);
+      $resp = $resp->withStatus(200)->withHeader('Content-type', 'application/json, charset=utf-8');
+      $resp->getBody()->write(json_encode($chaine));
+    }catch(Illuminate\Database\Eloquent\ModelNotFoundException $e){
+      $chaine = ["Erreur", "Ressource de l'ingrédient $id introuvable."];
+      $resp = $resp->withStatus(404)->withHeader('Content-type', 'application/json, charset=utf-8');
+      $resp->getBody()->write(json_encode($chaine));
+    }
+    return $resp;
+  }
+);
 
-$app->get("/ingredients/{id}[/]",function(Request $req, Response $resp, $args){
-  return (new IngredientController($this))->findIngredient($args['id']);
-});
-
-$app->get("/ingredients/{id}/categorie[/]",function(Request $req, Response $resp, $args){
-  return (new IngredientController($this))->getCategory($args['id']);
-});
+$app->get(
+  "/ingredients/{id}/categories[/]",
+  function(Request $req, Response $resp, $args){
+    try{
+      $id = $args['id'];
+      $chaine = IngredientController::categorieByIngredient($id);
+      $resp = $resp->withStatus(200)->withHeader('Content-type', 'application/json, charset=utf-8');
+      $resp->getBody()->write(json_encode($chaine));
+    }catch(Illuminate\Database\Eloquent\ModelNotFoundException $e){
+      $chaine = ["Erreur", "Ressource de l'ingrédient $id introuvable."];
+      $resp = $resp->withStatus(404)->withHeader('Content-type', 'application/json, charset=utf-8');
+      $resp->getBody()->write(json_encode($chaine));
+    }
+    return $resp;
+  }
+);
 
 $app->get(
   "/commandes/add[/]",function(Request $req, Response $resp, $args){
@@ -78,6 +101,40 @@ $app->get(
       $resp->getBody()->write(json_encode($chaine));
     }catch(Illuminate\Database\Eloquent\ModelNotFoundException $e){
       $chaine = ["Erreur", "Une erreur est survenue lors de l'ajout de la commande."];
+      $resp = $resp->withStatus(404)->withHeader('Content-type', 'application/json, charset=utf-8');
+      $resp->getBody()->write(json_encode($chaine));
+    }
+    return $resp;
+  }
+);
+
+$app->get(
+  "/commandes/{id}[/]",
+  function(Request $req, Response $resp, $args){
+    try{
+      $id = $args['id'];
+      $chaine = CommandeController::detailCommande($id);
+      $resp = $resp->withStatus(200)->withHeader('Content-type', 'application/json, charset=utf-8');
+      $resp->getBody()->write(json_encode($chaine));
+    }catch(Illuminate\Database\Eloquent\ModelNotFoundException $e){
+      $chaine = ["Erreur", "Ressource de la commande $id introuvable."];
+      $resp = $resp->withStatus(404)->withHeader('Content-type', 'application/json, charset=utf-8');
+      $resp->getBody()->write(json_encode($chaine));
+    }
+    return $resp;
+  }
+);
+
+$app->get(
+  "/commandes/{id}/sandwichs[/]",
+  function(Request $req, Response $resp, $args){
+    try{
+      $id = $args['id'];
+      $chaine = CommandeController::sandwichsByCommande($id);
+      $resp = $resp->withStatus(200)->withHeader('Content-type', 'application/json, charset=utf-8');
+      $resp->getBody()->write(json_encode($chaine));
+    }catch(Illuminate\Database\Eloquent\ModelNotFoundException $e){
+      $chaine = ["Erreur", "Ressource de la commande $id introuvable."];
       $resp = $resp->withStatus(404)->withHeader('Content-type', 'application/json, charset=utf-8');
       $resp->getBody()->write(json_encode($chaine));
     }

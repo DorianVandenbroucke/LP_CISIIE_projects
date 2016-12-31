@@ -11,11 +11,11 @@ class Commande extends Model{
   protected $fillable = ["montant", "date_de_livraison", "etat"];
   public $timestamps = false;
 
-  public function getIngredients(){
+  public function sandwichs(){
     return $this->belongsToMany(
-                                  "src\models\Ingredient",
-                                  "Ingredients_commande",
-                                  "id_ingredient", "id_commande"
+                                  "src\models\Sandwich",
+                                  "sandwich_commande",
+                                  "id_commande", "id_sandwich"
                                );
   }
 

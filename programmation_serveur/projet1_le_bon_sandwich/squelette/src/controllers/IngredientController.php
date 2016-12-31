@@ -10,55 +10,35 @@ class IngredientController extends AbstractController{
   private $request = null;
   private $auth;
 
-  public function __construct($http_req){
+  public function __construct(HttpRequest $http_req){
     $this->request = $http_req;
+    $this->auth = new Authentification();
   }
 
-  public function responseToJSON($data,$status)
-    {
-        $result = $this->request->response->withStatus($status)
-                                 ->withHeader('Content-Type','application/json');
-        $result->getBody()->write(json_encode($data));
-        return $result;
-    }
-
-  public function listIngredients()
-  {
-      try
-      {
-        $data = Ingredient::all();
-        return $this->responseToJSON($data,200);
-      }
-      catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e)
-      {
-        $message = "erreur lors de la selection des donées";
-        return $this->responseToJSON($data,404);
-      }
+  static public function detailIngredient($id){
+    $ingredient = Ingredient::findOrFail($id);
+    $chaine = [
+                "id" => $ingredient->id,
+                "description" => $ingredient->description,
+                "fournisseur" => $ingredient->fournisseur,
+                "img" => $ingredient->img,
+                "lien" => "/ingredients/$ingredient->id/categories",
+              ];
+    return $chaine;
   }
-    public function findIngredient($id)
-    {
-        try{
-            $data = Ingredient::findOrFail($id);
-            return $this->responseToJSON($data,200);
-        }
-        catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e)
-        {
-            $data =  "element introuvable";
-            return $this->responseToJson($data,404);
-        }
-    }
 
-    public function getCategorie($id)
-    {
-        try{
-            $data =  Ingredient::findOrFail($id)->getCategory;
-            return $this->responseToJSON($data,200);
-        }
-        catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e)
-        {
-            $data =  "element introuvable";
-            return $this->responseToJson($data,404);
-        }
-    }
+  static public function categorieByIngredient($id){
+    $ingredient = Ingredient::findOrFail($id);
+    $categorie = Categorie::findOrFail($ingredient->cat_id);
+
+    $chaine = [
+                "ingrédient" => $ingredient->nom,
+                "categorie" => [
+                                "nom" => $categorie->nom,
+                                "lien" => "/categories/$categorie->id"
+                               ]
+              ];
+    return $chaine;
+  }
 
 }
