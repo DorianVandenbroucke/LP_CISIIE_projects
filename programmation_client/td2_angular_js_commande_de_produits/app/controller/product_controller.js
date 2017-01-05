@@ -2,13 +2,14 @@
 angular.module("shop").controller(
   "ProductController",
   [
-    "$scope", "$http",
-    function($scope, $http){
+    "$scope", "$http", "Product",
+    function($scope, $http, Product){
 
       $http.get("json/products.php").then(function($response){
         $scope.products = [];
-        $response.data.forEach(function(p){
-          $scope.products.push(p);
+        $response.data.forEach(function(data){
+          var newProduct = new Product(data);
+          $scope.products.push(newProduct);
         });
       },
       function(error){
