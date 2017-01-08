@@ -85,17 +85,22 @@ print_r("Le programme s'est exéuté en ".($end_date - $start_date)." secondes."
 $platforms = Platform::where('install_base', '>=', 10000000)->get();
 $end_date = microtime(true);
 print_r("Le programme s'est exéuté en ".($end_date - $start_date)." secondes.");
-*/
+
 
 // afficher le nom des personnages des jeux dont le nom contient 'Mario'
-/*$characters = Character::select('name')->with(['games' => function($query){
+$characters = Character::select('name')->with(['games' => function($query){
   $query->where('name', 'like', '%Mario%');
-}])->get();*/
-$characters = Character::select('name')->whereHas('games',function($q){
-  $q->where('name', 'like', '%Mario%');
-})->get();
+}])->get();
 foreach($characters as $character){
   echo "$character->name<br />";
+}*/
+
+// les jeux développés par une compagnie dont le nom contient 'Sony'
+$games = Game::select('name')->with(['companies' => function($query){
+  $query->where('name', 'like','%Sony%');
+}])->get();
+foreach($games as $game){
+  echo "$game->name<br />";
 }
 
 /*
@@ -108,9 +113,8 @@ $end_date = microtime(true);
 print_r("Le programme s'est exéuté en ".($end_date - $start_date)." secondes.");
 */
 
-/*
+
 $queries = DB::getQueryLog();
 echo "<h1>Requêtes SQL générées</h1>";
 echo "<strong>Nombre de requêtes générées</strong>:".count($queries)."<br /><pre>";
 var_dump($queries); echo "</pre>";
-*/

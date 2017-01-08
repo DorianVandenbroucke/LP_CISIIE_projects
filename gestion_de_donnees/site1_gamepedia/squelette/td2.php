@@ -29,7 +29,7 @@ foreach($games as $game){
     echo "<pre>$character->name<br /></pre>";
   }
 }
-
+*/
 // les jeux développés par une compagnie dont le nom contient 'Sony'
 $companies = Company::where('name', 'like', '%Sony%')->get();
 foreach($companies as $company){
@@ -38,7 +38,7 @@ foreach($companies as $company){
     echo "<pre>$game->name<br /></pre>";
   }
 }
-
+/*
 // le rating initial (indiquer le rating board) des jeux dont le nom contient Mario
 $games = Game::where('name', 'like', '%Mario%')->get();
 foreach($games as $game){
@@ -80,7 +80,7 @@ foreach($games as $game){
   if(isset($companies[0]) && isset($ratings[0])){
     echo "$game->name<br />";
   }
-}*/
+}
 
 // les jeux dont le nom débute Mario, publiés par une compagnie dont le nom contient "Inc", dont le rating initial contient "3+" et ayant reçu un avis de la part du rating board nommé "CERO"
 $games = Game::where('name', 'like', 'Mario%')->get();
@@ -92,7 +92,7 @@ foreach($games as $game){
   if(isset($companies[0]) && isset($ratings[0])){
     echo "$game->name<br />";
   }
-}
+}*/
 
 $queries = DB::getQueryLog();
 echo "<h1>Requêtes SQL générées</h1>";

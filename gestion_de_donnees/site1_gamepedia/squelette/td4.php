@@ -51,7 +51,7 @@ if(isset($_GET['id']) && $_GET['id'] == 2){
   $faker = Faker\Factory::create();
 
   // On crée 25 000 utilisateurs
-  for($i = 0; $i < 10; $i++){
+  for($i = 0; $i < 25000; $i++){
     $new_user = new User();
     $new_user->mail = $faker->email;
     $new_user->save();
@@ -70,11 +70,13 @@ if(isset($_GET['id']) && $_GET['id'] == 2){
   }
 
   // On crée les 250 000 commentaires
-  for($i = 0; $i < 20; $i++){
+  for($i = 0; $i < 250000; $i++){
 
     // On récupère une clé primaire dans la table user
-    $id_user = array_rand($users_id_tab);
-    $id_game = array_rand($games_id_tab);
+    $key_id_user = array_rand($users_id_tab);
+    $key_id_game = array_rand($games_id_tab);
+    $id_user = $users_id_tab[$key_id_user];
+    $id_game = $games_id_tab[$key_id_game];
     echo "$id_user $id_game<br />";
 
     $new_comment = new Comment();
